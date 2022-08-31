@@ -10,7 +10,15 @@ const port = 3000
 
 
 //define routes
-
+app.get("/budgets", (req, res) =>{
+    res.send("")
+})
+app.get("/budgets/:index", (req, res) =>{
+    res.send("")
+})
+app.get("/budgets/new", (req, res) =>{
+    res.send("")
+})
 //index
 
 //new
@@ -21,5 +29,7 @@ const port = 3000
 // e
 
 // show
-
+app.post("/budgets", (req, res) => {
+    res.send("")
+})
 //port listen
