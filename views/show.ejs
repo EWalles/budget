@@ -5,14 +5,27 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/normalize.css" />
+    <link rel="stylesheet" href="/skeleton.css" />
     <title>Document</title>
 </head>
-
 <body>
-
-<link rel="stylesheet" href="/normalize.css" />
-<link rel="stylesheet" href="/skeleton.css" />
-
+    <div class="container">
+        <h1>
+            <%=dataIndex.name%>
+        </h1>
+        <% for (const property in dataIndex) { %>
+            <h5>
+                <%=property[0].toUpperCase() + property.slice(1, property.length)%>
+            </h5>
+            <li type="square">
+                <%=dataIndex[property]%>
+            </li>
+            <% } %>
+            <form action="/budgets/">
+                <input type="submit" value="Back" />
+            </form>
+    </div>
 </body>
 
 </html>
