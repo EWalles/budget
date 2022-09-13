@@ -15,8 +15,8 @@ let bankAcc = 0;
 app.use(express.static("Public"))
 app.use(express.urlencoded({ extended: false }))
 
-app.get("/budgets", (req, res) => {
-    res.render("views/index.ejs", {
+app.get("/", (req, res) => {
+    res.render("index.ejs", {
         data: budget,
         money: bankAcc,
     })
@@ -29,19 +29,15 @@ app.get("/budgets/:index", (req, res) =>{
     res.send("views/index.ejs")
 })
 
-app.get("/budgets/new", (req, res) =>{
-    res.send("")
-})
-
 // new
-app.get("/budgets/new", (req, res) => {
+app.get("/new", (req, res) => {
     res.render("new.ejs", {
         newData: budget,
     })
 })
 
 // create
-app.post("/budgets", (req, res) => {
+app.post("/", (req, res) => {
     let tag = req.body.tags 
     const tagArr = tag.split(", ") 
         let budgetObj = { 
@@ -53,7 +49,7 @@ app.post("/budgets", (req, res) => {
     }
     budget.push(budgetObj) 
     console.log(budget)
-    res.redirect("/budgets")
+    res.redirect("/")
 })
 
 // show
