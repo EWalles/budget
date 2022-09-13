@@ -1,6 +1,6 @@
 //require dependencies
 const express = require("express");
-const budget = require("./models/budget");
+const budget = require("./models/budgets.js");
 const bodyParser = require("body-parser")
 
 
@@ -9,13 +9,14 @@ const app = express();
 const port = 3000
 
 //bank
-let bankAcc = 0
+let bankAcc = 0;
 
 //middleware
 app.use(express.static("Public"))
 app.use(express.urlencoded({ extended: false }))
+
 app.get("/budgets", (req, res) => {
-    res.render("index.ejs", {
+    res.render("views/index.ejs", {
         data: budget,
         money: bankAcc,
     })
@@ -23,15 +24,15 @@ app.get("/budgets", (req, res) => {
 
 
 //define routes
-app.get("/budgets", (req, res) =>{
-    res.send("")
-})
+
 app.get("/budgets/:index", (req, res) =>{
-    res.send("")
+    res.send("views/index.ejs")
 })
+
 app.get("/budgets/new", (req, res) =>{
     res.send("")
 })
+
 // new
 app.get("/budgets/new", (req, res) => {
     res.render("new.ejs", {
@@ -41,12 +42,17 @@ app.get("/budgets/new", (req, res) => {
 
 // create
 app.post("/budgets", (req, res) => {
-    // separate tags data to an array
-    let tags = req.body.tags.split(',');
-    // set tags in body to an array
-    req.body.tags = tags;
-    budget.push(req.body)
-    // console.log(budget)
+    let tag = req.body.tags 
+    const tagArr = tag.split(", ") 
+        let budgetObj = { 
+        date: req.body.date,
+        name: req.body.name,
+        from: req.body.from,
+        amount: req.body.amount,
+        tags: tagArr,
+    }
+    budget.push(budgetObj) 
+    console.log(budget)
     res.redirect("/budgets")
 })
 
@@ -58,5 +64,5 @@ app.get("/budgets/:index", (req, res) => {
 })
 //listen
 app.listen(port, () => {
-    console.log("Chicago is listening")
+    console.log("Can you hear me")
 });
